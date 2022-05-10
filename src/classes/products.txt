@@ -10,3 +10,7 @@ stihl; Germany; 22.02.22
 LADA; Russia; 22.03.08
 duracell; USA; 22.05.02
 Armani; Italy; 22.04.25
+bosch; Germany; 22.03.16
+phillips; Netherlands; 21.11.19
+xerox; USA; 22.04.05
+fender; USA; 22.02.01

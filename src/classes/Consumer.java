@@ -1,19 +1,24 @@
 package classes;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
-public class Consumer extends Thread {
+public class Consumer implements Custom {
     static final String BLUE = "\u001b[34m";
     static final String DEFAULT = "\u001b[0m";
 
-    private final List<String> products;
+    private final BlockingQueue<String> products;
     private final Stock stock;
+    private final int wantToBuy;
+    private final String name;
 
-    public Consumer(String name, Stock stock) {
-        super(name);
+    public Consumer(String name, Stock stock, List<String> products, int wantToBuy) {
+        this.name = name;
         this.stock = stock;
-        this.products = new ArrayList<>();
+        this.products = new ArrayBlockingQueue<>(products.size());
+        this.wantToBuy = wantToBuy;
+        products.addAll(products);
     }
 
     public void purchase(String product) {
@@ -23,24 +28,31 @@ public class Consumer extends Thread {
 
     @Override
     public String toString() {
-        return "Consumer " + getName() + " bought products: " + BLUE + products + DEFAULT + ';';
+        return "Consumer " + name + " bought products: " + BLUE + products + DEFAULT + ';';
     }
 
-    @Override
-    public void run() {
-        boolean isBought = true;
-        while (isBought) {
+    public Consumer buy() {
+        int countTrying = 0;
+        while (products.size() < wantToBuy) {
             String product = stock.getProduct();
             if (product != null) {
                 purchase(product);
-                System.out.println(getName() + " purchase " + product);
+                System.out.println(name + " purchase " + product);
+                countTrying = 0;
+            } else {
+                try {
+                    System.out.println(name + " is sleep (zzz)");
+                    Thread.sleep(2000);
+                    countTrying++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            isBought = products.size() < 3;
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (countTrying > 5) {
+                System.err.println(name + " hasn't bought enough");
+                break;
             }
         }
+        return this;
     }
 }

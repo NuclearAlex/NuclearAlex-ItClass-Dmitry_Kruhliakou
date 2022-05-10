@@ -1,18 +1,30 @@
 package classes;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Stock {
-    private final Queue<String> products;
+    private final BlockingQueue<String> products;
 
-    public Stock() {
-        this.products = new LinkedList<>();
+    public int getMaxStock() {
+        return maxStock;
+    }
+
+    public int getCurrentProductsCount() {
+        return products.size();
+    }
+
+    private final int maxStock;
+
+    public Stock(List<String> productList, int maxStock) {
+        this.products = new ArrayBlockingQueue<>(productList.size());
+        this.maxStock = maxStock;
     }
 
     public synchronized void addProduct(String product) {
         String[] dummy = product.split("; ");
-        products.add(dummy[0]);
+        products.offer(dummy[0]);
     }
 
     public synchronized String getProduct() {
