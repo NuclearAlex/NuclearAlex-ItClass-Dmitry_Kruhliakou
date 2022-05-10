@@ -1,0 +1,16 @@
+iPhone; USA; 22.05.08
+Asus; Taiwan; 21.11.13
+SAAB; Switzerland; 22.01.04
+celeron; Taiwan; 22.03.06
+kingston; Sweden; 21.12.30
+samsung; Japan; 22.04.09
+KIA; Korea; 22.02.18
+makita; Japan; 22.01.04
+stihl; Germany; 22.02.22
+LADA; Russia; 22.03.08
+duracell; USA; 22.05.02
+Armani; Italy; 22.04.25
+bosch; Germany; 22.03.16
+phillips; Netherlands; 21.11.19
+xerox; USA; 22.04.05
+fender; USA; 22.02.01
